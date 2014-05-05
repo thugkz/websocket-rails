@@ -151,8 +151,7 @@ module WebsocketRails
       Fiber.new do
         id = connection.user_identifier
         user = connection.user
-        p user
-        redis.hset ('websocket_rails.users', id, user.path)
+        redis.hset 'websocket_rails.users', id, {full_name: user.full_name, path: user.path}.to_json
       end.resume
     end
 
